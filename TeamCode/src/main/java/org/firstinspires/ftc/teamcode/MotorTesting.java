@@ -68,13 +68,12 @@ public class MotorTesting extends LinearOpMode {
         slide2.setTargetPosition(0);
         slide1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         slide2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        slide1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        slide2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         slide1.setZeroPowerBehavior(floatt);
         slide2.setZeroPowerBehavior(floatt);
 
-        int h = 0;
+        DcMotor arm = hardwareMap.get(DcMotor.class, "arm");
+        arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         telemetry.update();
 
@@ -89,6 +88,7 @@ public class MotorTesting extends LinearOpMode {
             telemetry.addData("bottomRight", bottomRight.getCurrentPosition());
             telemetry.addData("slide1", slide1.getCurrentPosition());
             telemetry.addData("slide2", slide2.getCurrentPosition());
+            telemetry.addData("arm", arm.getCurrentPosition());
             telemetry.update();
         }
     }

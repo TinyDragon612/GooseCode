@@ -13,22 +13,25 @@ public class values {
             case NUDGED:
                 return 0;
             case LOW_CHAMBER:
-                return 0;
+                return 550;
             case HIGH_CHAMBER:
-                return 0;
+                return 550;
             case LOW_BASKET:
-                return 0;
+                return 350;
             case HIGH_BASKET:
-                return 0;
+                return 280;
             case ON_WALL:
-                return 0;
-            case HANGING:
-                return 0;
+                return 490;
+            case HANGING_STAGE_1:
+                return 700;
+            case HANGING_STAGE_2:
+                return 700;
             case ALL_THE_WAY_BACK:
                 return 0;
-            //Default is the ON_GROUND position
+            case ON_GROUND:
+                return 700;
             default:
-                return 0;
+                return 500;
         }
     }
 
@@ -38,14 +41,16 @@ public class values {
             case LOW_CHAMBER:
                 return 0;
             case HIGH_CHAMBER:
-                return 0;
+                return 1000;
             case LOW_BASKET:
-                return 0;
+                return 1125;
             case HIGH_BASKET:
-                return 0;
+                return slidesMaximum;
             case ON_WALL:
                 return 0;
-            case HANGING:
+            case HANGING_STAGE_1:
+                return 1300;
+            case HANGING_STAGE_2:
                 return 0;
             case SLIDES_MAX:
                 return slidesMaximum;
@@ -63,12 +68,13 @@ public class values {
         LOW_BASKET,
         HIGH_BASKET,
         ON_WALL,
-        HANGING,
+        HANGING_STAGE_1,
+        HANGING_STAGE_2,
         ALL_THE_WAY_BACK,
-        SLIDES_MAX
+        SLIDES_MAX,
     }
 
-    public static int slidesMaximum = 2800;
+    public static int slidesMaximum = 2990;
 
 
     //Auton movement values

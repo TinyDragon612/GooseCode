@@ -42,4 +42,6 @@ public abstract class universalOpMode extends LinearOpMode {
         wheels.side(distance);
     }
 
+    public void rotate(int degrees){ wheels.rotate(degrees);}
+
 }

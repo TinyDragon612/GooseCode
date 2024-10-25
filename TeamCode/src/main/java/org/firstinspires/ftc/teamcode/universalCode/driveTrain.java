@@ -41,7 +41,6 @@ public class driveTrain {
         bottomLeft.setDirection(DcMotorSimple.Direction.REVERSE);
 
         bottomRight = hardwareMap.get(DcMotor.class, "bottomRight");
-        bottomRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
         imu = new IMUInterface(hardwareMap);
 

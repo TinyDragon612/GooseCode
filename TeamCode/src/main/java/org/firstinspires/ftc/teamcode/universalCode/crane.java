@@ -9,6 +9,7 @@ public class crane {
     private DcMotor leftDrawerSlide, rightDrawerSlide, arm;
     private int targetPosition;
     private double power = 0;
+    public boolean manualControl;
     private DistanceSensor proxy;
 
     private values.craneState status;
@@ -24,9 +25,8 @@ public class crane {
 
         status = startingState;
         arm = hardwareMap.get(DcMotor.class, "arm");
-        resetArm();
         arm.setTargetPosition(0);
-        arm.setPower(0.6);
+        arm.setPower(0.3);
         arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         arm.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         arm.setDirection(DcMotorSimple.Direction.REVERSE);
@@ -76,6 +76,9 @@ public class crane {
     public void craneMaintenance(){
         if(offCheck() && targetPosition == 0) {
             resetEncoders();
+        }
+        if(manualControl){
+            return;
         }
         arm.setTargetPosition(values.getArmTargetPosition(status));
         setTargetPosition(values.getSlidesTargetPosition(status));

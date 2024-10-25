@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import org.firstinspires.ftc.teamcode.universalCode.universalOpMode;
 import org.firstinspires.ftc.teamcode.universalCode.values;
 
-@TeleOp(name="Driver Mode", group="Linear Opmode")
+@TeleOp(name = "pee pee poo poo haha wfnhuvgwvghmugtvmdrktvtmgtmhkhdgvtrkhmvhtkhrllo htrjgotj i vetgiurgthuhgtfujjfiuhedhgihrkhhjgfhoijjohgrhuegtwioghiou", group="Linear Opmode")
 //@Disabled
 public class DriverMode extends universalOpMode {
 
@@ -30,6 +30,7 @@ public class DriverMode extends universalOpMode {
         telemetry.update();
         waitForStart();
         slides.resetEncoders();
+        slides.resetArm();
         while (opModeIsActive()) {
             telemetry.addData("Status", "Running");
 
@@ -48,12 +49,14 @@ public class DriverMode extends universalOpMode {
             It ALSO has the hanging bypass for player 1.
              */
             if(gamepad1.dpad_up) {
-                slides.setStatus(values.craneState.HANGING);
+                slides.setStatus(values.craneState.HANGING_STAGE_1);
                 moveByPower = false;
+            }else if(gamepad1.dpad_down){
+                slides.setStatus(values.craneState.HANGING_STAGE_2);
             }else if(gamepad2.cross){
                 slides.setStatus(values.craneState.LOW_CHAMBER);
                 moveByPower = false;
-            }else if((gamepad2.circle && slides.getStatus() != values.craneState.NUDGED) || gamepad1.dpad_down){
+            }else if(gamepad2.circle && slides.getStatus() != values.craneState.NUDGED){
                 //We don't want the human player to be holding the button and force the robot to ram the claw into the wall.
                 slides.setStatus(values.craneState.ON_GROUND);
                 moveByPower = false;
@@ -84,13 +87,17 @@ public class DriverMode extends universalOpMode {
             }else if(gamepad2.right_bumper){
                 clawServo.setPosition(values.clawOpen);
             }
+            slides.manualControl = moveByPower;
 
             slides.craneMaintenance();
 
 
             telemetry.addData("Left Crane Motor Position", slides.getCurrentLeftPosition());
             telemetry.addData("Right Crane Motor Position", slides.getCurrentRightPosition());
+            telemetry.addData("Left Joystick Y", gamepad1.left_stick_y);
             telemetry.addData("Trigger total:", gamepad2.right_trigger + gamepad2.left_trigger);
+            telemetry.addData("Crane State", slides.getStatus());
+            telemetry.addData("Arm Position", slides.getCurrentArmPosition());
             telemetry.update();
 
         }

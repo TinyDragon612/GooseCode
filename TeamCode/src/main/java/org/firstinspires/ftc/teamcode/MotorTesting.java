@@ -73,6 +73,7 @@ public class MotorTesting extends LinearOpMode {
         slide2.setZeroPowerBehavior(floatt);
 
         DcMotor arm = hardwareMap.get(DcMotor.class, "arm");
+        arm.setDirection(DcMotorSimple.Direction.REVERSE);
         arm.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         telemetry.update();

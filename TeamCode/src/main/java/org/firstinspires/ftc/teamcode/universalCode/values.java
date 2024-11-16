@@ -3,8 +3,8 @@ package org.firstinspires.ftc.teamcode.universalCode;
 public class values {
 
     //Claw Positions
-    public static double clawOpen = 0;
-    public static double clawClosed = 0.12;
+    public static double clawOpen = 0.3;
+    public static double clawClosed = 0.48;
 
 
     //Crane Arm Positions (REDO)\
@@ -13,25 +13,27 @@ public class values {
             case NUDGED:
                 return 0;
             case LOW_CHAMBER:
-                return 550;
+                return 0;
             case HIGH_CHAMBER:
-                return 550;
+                return 400;
             case LOW_BASKET:
-                return 350;
+                return 470;
             case HIGH_BASKET:
-                return 280;
+                return 370;
             case ON_WALL:
-                return 490;
+                return 545;
             case HANGING_STAGE_1:
-                return 700;
+                return 0;
             case HANGING_STAGE_2:
-                return 700;
+                return 0;
             case ALL_THE_WAY_BACK:
                 return 0;
             case ON_GROUND:
-                return 700;
+                return 640;
+            case AUTON_ASCEND:
+                return 400;
             default:
-                return 500;
+                return 0;
         }
     }
 
@@ -41,15 +43,15 @@ public class values {
             case LOW_CHAMBER:
                 return 0;
             case HIGH_CHAMBER:
-                return 1000;
+                return 0;
             case LOW_BASKET:
-                return 1125;
+                return 1475;
             case HIGH_BASKET:
-                return slidesMaximum;
+                return 2200;
             case ON_WALL:
                 return 0;
             case HANGING_STAGE_1:
-                return 1300;
+                return 0;
             case HANGING_STAGE_2:
                 return 0;
             case SLIDES_MAX:
@@ -72,13 +74,8 @@ public class values {
         HANGING_STAGE_2,
         ALL_THE_WAY_BACK,
         SLIDES_MAX,
+        AUTON_ASCEND
     }
 
-    public static int slidesMaximum = 2990;
-
-
-    //Auton movement values
-    public static int turn90DegreesClockwise = 90;
-
-    public static int turn90DegreesCounterClockwise = - 90;
+    public static int slidesMaximum = 2150;
 }

@@ -101,7 +101,7 @@ public class driveTrain {
         this.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         this.setTargetPosition(0);
         this.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        this.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         //changed from zeropowerbehavior.float
         //brake makes it brake on zero power, resisting any change
     }
@@ -155,7 +155,6 @@ public class driveTrain {
         targetHeading = target;
         resetEncoders();
         opMode.sleep(100);
-
     }
 
     public void waitForWheels(int target, boolean foward) {
@@ -192,9 +191,7 @@ public class driveTrain {
             opMode.telemetry.addData("frontRight: ", topRight.getCurrentPosition());
             opMode.telemetry.addData("backLeft: ", bottomLeft.getCurrentPosition());
             opMode.telemetry.addData("backRight: ", bottomRight.getCurrentPosition());
-
-            opMode.telemetry.addData("left draw slide", crane.getCurrentLeftPosition());
-            opMode.telemetry.addData("claw spin", crane.getCurrentArmPosition());
+            opMode.telemetry.addData("arm", crane.getCurrentArmPosition());
 
             opMode.telemetry.update();
             crane.craneMaintenance();
@@ -234,7 +231,7 @@ public class driveTrain {
         while (opMode.opModeIsActive() && Math.abs(error) > 0.75) {
             crane.craneMaintenance();
             double motorPower = (error < 0 ? -0.5 : 0.5);
-            motorPower *= Math.min(1, Math.abs(error / 20));
+            motorPower *= Math.min(1, Math.abs(error / 30));
             if(Math.abs(motorPower) < 0.1){
                 motorPower = (error < 0 ? -0.1: 0.1);
             }

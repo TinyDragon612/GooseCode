@@ -18,6 +18,8 @@ public class DriverMode extends universalOpMode {
 
         wheels.setPower(1);
 
+        clawServo.setPosition(values.clawClosed);
+
         setOpModeType(2);
 
         telemetry.update();
@@ -30,7 +32,6 @@ public class DriverMode extends universalOpMode {
         telemetry.update();
         waitForStart();
         slides.resetEncoders();
-        slides.resetArm();
         while (opModeIsActive()) {
             telemetry.addData("Status", "Running");
 
@@ -54,7 +55,7 @@ public class DriverMode extends universalOpMode {
             }else if(gamepad1.dpad_down){
                 slides.setStatus(values.craneState.HANGING_STAGE_2);
             }else if(gamepad2.cross){
-                slides.setStatus(values.craneState.LOW_CHAMBER);
+                slides.setStatus(values.craneState.ALL_THE_WAY_BACK);
                 moveByPower = false;
             }else if(gamepad2.circle && slides.getStatus() != values.craneState.NUDGED){
                 //We don't want the human player to be holding the button and force the robot to ram the claw into the wall.
@@ -82,6 +83,22 @@ public class DriverMode extends universalOpMode {
                 slides.setPower(0);
             }
 
+            if(gamepad2.left_stick_y != 0){
+                moveByPower = true;
+            }
+
+            if(slides.getStatus() == values.craneState.HIGH_CHAMBER){
+                slides.setArmPower(0.8);
+            }else if(slides.getStatus() == values.craneState.ALL_THE_WAY_BACK){
+                slides.setArmPower(0.1);
+            }else{
+                slides.setArmPower(0.2);
+            }
+
+            if(moveByPower){
+                slides.setArmManual(gamepad2.left_stick_y*0.25);
+            }
+
             if(gamepad2.left_bumper){
                 clawServo.setPosition(values.clawClosed);
             }else if(gamepad2.right_bumper){
@@ -94,10 +111,14 @@ public class DriverMode extends universalOpMode {
 
             telemetry.addData("Left Crane Motor Position", slides.getCurrentLeftPosition());
             telemetry.addData("Right Crane Motor Position", slides.getCurrentRightPosition());
-            telemetry.addData("Left Joystick Y", gamepad1.left_stick_y);
-            telemetry.addData("Trigger total:", gamepad2.right_trigger + gamepad2.left_trigger);
+//            telemetry.addData("Left Joystick Y", gamepad1.left_stick_y);
+//            telemetry.addData("Trigger total:", gamepad2.right_trigger + gamepad2.left_trigger);
             telemetry.addData("Crane State", slides.getStatus());
             telemetry.addData("Arm Position", slides.getCurrentArmPosition());
+            telemetry.addData("Manual Control?", slides.manualControl);
+            telemetry.addData("amps right", slides.getAmpsRight());
+            telemetry.addData("amps left", slides.getAmpsLeft());
+            telemetry.addData("Arm Power", slides.getArmPower());
             telemetry.update();
 
         }

@@ -1,13 +1,8 @@
 package org.firstinspires.ftc.teamcode.universalCode;
 
-import android.util.Size;
-
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
-
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
-import org.firstinspires.ftc.vision.VisionPortal;
 
 public abstract class universalOpMode extends LinearOpMode {
 
@@ -21,7 +16,7 @@ public abstract class universalOpMode extends LinearOpMode {
         setup(0.5);
     }
     public void setup(double cranePower){
-        slides = new crane(hardwareMap, cranePower, false, values.craneState.ON_GROUND, proxy);
+        slides = new crane(hardwareMap, cranePower, false, values.craneState.ALL_THE_WAY_BACK, proxy);
         wheels = new driveTrain(hardwareMap, this);
         clawServo = hardwareMap.get(Servo.class, "claw");
         proxy = hardwareMap.get(DistanceSensor.class, "proxy");
@@ -34,7 +29,7 @@ public abstract class universalOpMode extends LinearOpMode {
         opModeType = type;
     }
 
-    public void foward(int distance){
+    public void forward(int distance){
         wheels.foward(distance);
     }
 

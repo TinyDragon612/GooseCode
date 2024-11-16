@@ -52,8 +52,12 @@ public class MotorTesting extends LinearOpMode {
         bottomRight = hardwareMap.get(DcMotor.class, "bottomRight");
         bottomLeft = hardwareMap.get(DcMotor.class, "bottomLeft");
 
+        topRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        topLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bottomRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        bottomLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
         topLeft.setDirection(DcMotor.Direction.REVERSE);
-        bottomRight.setDirection(DcMotor.Direction.REVERSE);
         bottomLeft.setDirection(DcMotor.Direction.REVERSE);
 
         topRight.setZeroPowerBehavior(floatt);

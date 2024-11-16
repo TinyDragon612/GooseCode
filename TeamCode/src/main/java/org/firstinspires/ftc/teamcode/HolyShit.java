@@ -33,7 +33,7 @@ import com.qualcomm.robotcore.util.ElapsedTime.Resolution;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 @TeleOp(name="DevilsOutreach", group="Linear Opmode")
-//@Disabled
+@Disabled
 public class HolyShit extends LinearOpMode {
 
     // Declare OpMode members.
